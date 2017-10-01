@@ -5,10 +5,8 @@
     name: theopenlab/cicd
     templates:
       - merge-check
-      - noop-jobs
 
 - project:
     name: theopenlab/gophercloud
     templates:
       - merge-check
-      - noop-jobs
