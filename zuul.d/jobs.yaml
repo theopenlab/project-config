@@ -28,8 +28,6 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
-    secrets:
-      - site_logs
 
 - job:
     name: base-minimal
@@ -52,8 +50,6 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
-    secrets:
-      - site_logs
 
 - job:
     name: base-test
@@ -73,17 +69,12 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
-    secrets:
-      - site_logs
 
 - job:
     name: publish-openstack-artifacts
     description: |
       Publish job to upload artifacts to tarballs.openstack.org
     post-run: playbooks/publish/openstack-artifacts
-    secrets:
-      - secret: site_tarballs
-        name: fileserver
 
 - job:
     name: release-openstack-python
@@ -95,10 +86,6 @@
     post-run:
       - playbooks/python-tarball/post
       - playbooks/publish/pypi
-    secrets:
-      - secret: pypi_secret
-        name: pypi_info
-      - gpg_key
 
 - job:
     name: publish-openstack-python-docs
@@ -118,9 +105,6 @@
       - zuul: openstack-infra/openstack-zuul-jobs
     vars:
       tox_constraints_file: "{{ ansible_user_dir }}/src/git.openstack.org/openstack/requirements/upper-constraints.txt"
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-openstack-sphinx-docs
@@ -140,9 +124,6 @@
       - zuul: openstack-infra/openstack-zuul-jobs
     vars:
       tox_constraints_file: "{{ ansible_user_dir }}/src/git.openstack.org/openstack/requirements/upper-constraints.txt"
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-openstack-specs
@@ -160,8 +141,6 @@
       - zuul: openstack-infra/openstack-zuul-jobs
     vars:
       tox_constraints_file: "{{ ansible_user_dir }}/src/git.openstack.org/openstack/requirements/upper-constraints.txt"
-    secrets:
-      - site_logs
 
 - job:
     name: publish-openstack-specs-site
@@ -178,8 +157,6 @@
       - zuul: openstack-infra/openstack-zuul-jobs
     vars:
       tox_constraints_file: "{{ ansible_user_dir }}/src/git.openstack.org/openstack/requirements/upper-constraints.txt"
-    secrets:
-      - site_logs
 
 - job:
     name: publish-openstack-python-docs-infra
@@ -195,9 +172,6 @@
     roles:
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-openstack-sphinx-docs-infra
@@ -213,9 +187,6 @@
     roles:
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-infra-manual
@@ -232,9 +203,6 @@
     roles:
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-service-types-authority
@@ -248,8 +216,6 @@
     roles:
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
-    secrets:
-      - site_logs
 
 - job:
     name: publish-infra-index
@@ -265,9 +231,6 @@
     roles:
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
-    secrets:
-      - secret: afsdocs_secret
-        name: afs
 
 - job:
     name: publish-openstack-python-branch-tarball
@@ -286,16 +249,11 @@
     pre-run: playbooks/yaml2ical/pre
     run: playbooks/yaml2ical/run
     post-run: playbooks/yaml2ical/post
-    secrets:
-      - eavesdrop_ssh_key
 
 - job:
     name: propose-updates
     pre-run: playbooks/proposal/pre
     run: playbooks/proposal/propose-updates
-    secrets:
-      - secret: proposal_ssh_key
-        name: ssh_key
 
 - job:
     name: propose-update-constraints
@@ -344,18 +302,12 @@
       - openstack-infra/puppet-kerberos
       - openstack-infra/puppet-openafs
     semaphore: wheel-mirror
-    secrets:
-      - name: afs
-        secret: wheel_keytab
 
 - job:
     name: release-wheel-mirror
     run: playbooks/wheel/release
     nodeset:
       nodes: []
-    secrets:
-      - name: afs
-        secret: afsadmin_keytab
 
 - job:
     name: tag-releases
@@ -363,11 +315,6 @@
     run: playbooks/release/tag
     post-run: playbooks/release/post
     final: true
-    secrets:
-      - name: lp_creds
-        secret: lp_creds
-      - name: ssh_key
-        secret: release_ssh_key
 
 - job:
     name: project-config-check-main-yaml
