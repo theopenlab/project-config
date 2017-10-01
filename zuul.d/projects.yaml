@@ -2,12 +2,6 @@
 # Contains project pipeline definitions
 
 - project:
-    name: theopenlab/cicd
-    check:
-      jobs:
-        - base
-
-- project:
     name: theopenlab/gophercloud
     check:
       jobs:
