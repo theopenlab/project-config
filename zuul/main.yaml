@@ -17,5 +17,4 @@
           #- openstack/tempest
           # After this point, sorting projects alphabetically will help
           # merge conflicts
-          - theopenlab/cicd
           - theopenlab/gophercloud
