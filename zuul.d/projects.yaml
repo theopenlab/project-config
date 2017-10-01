@@ -3,10 +3,12 @@
 
 - project:
     name: theopenlab/cicd
-    templates:
-      - merge-check
+    check:
+      jobs:
+        - noop
 
 - project:
     name: theopenlab/gophercloud
-    templates:
-      - merge-check
+    check:
+      jobs:
+        - noop
