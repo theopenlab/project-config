@@ -1,4 +1,0 @@
-datasource:
-  name: OpenStack
-  isDefault: True
-  url: http://graphite.openstack.org
