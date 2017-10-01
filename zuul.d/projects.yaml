@@ -5,10 +5,10 @@
     name: theopenlab/cicd
     check:
       jobs:
-        - noop
+        - base
 
 - project:
     name: theopenlab/gophercloud
     check:
       jobs:
-        - noop
+        - base
