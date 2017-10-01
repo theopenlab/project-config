@@ -2,13 +2,13 @@
 # Contains project pipeline definitions
 
 - project:
-    name: theopenlab/gophercloud
+    name: theopenlab/cicd
     templates:
       - merge-check
       - noop-jobs
 
 - project:
-    name: theopenlab/cicd
+    name: theopenlab/gophercloud
     templates:
       - merge-check
       - noop-jobs

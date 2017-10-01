@@ -8,12 +8,14 @@
           # Order matters, load common job repos first
           - theopenlab/zuul-jobs:
               shadow: theopenlab/project-config
-          - openstack-infra/openstack-zuul-jobs
-          - openstack-infra/openstack-zuul-roles
+          #- openstack-infra/openstack-zuul-jobs
+          #- openstack-infra/openstack-zuul-roles
           # devstack-gate, devsack and tempest all define things expected
           # to be widely used.
-          - openstack-infra/devstack-gate
-          - openstack-dev/devstack
-          - openstack/tempest
+          #- openstack-infra/devstack-gate
+          #- openstack-dev/devstack
+          #- openstack/tempest
           # After this point, sorting projects alphabetically will help
           # merge conflicts
+          - theopenlab/cicd
+          - theopenlab/gophercloud
