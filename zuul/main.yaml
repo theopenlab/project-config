@@ -18,3 +18,4 @@
           # After this point, sorting projects alphabetically will help
           # merge conflicts
           - theopenlab/gophercloud
+          - theopenlab/cicd
