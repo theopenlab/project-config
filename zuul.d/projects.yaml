@@ -6,3 +6,9 @@
     check:
       jobs:
         - noop
+
+- project:
+    name: theopenlab/cicd
+    check:
+      jobs:
+        - noop
