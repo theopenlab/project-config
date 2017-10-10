@@ -19,3 +19,4 @@
           # merge conflicts
           - theopenlab/gophercloud
           - theopenlab/cicd
+          - theopenlab/requirements
