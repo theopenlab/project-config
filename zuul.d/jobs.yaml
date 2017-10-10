@@ -8,10 +8,9 @@
       doesn't validate the node and does not generate an ARA report.
       These tasks, if required, can be included by the dependant jobs
       themselves on a need basis.
-    pre-run: playbooks/base-minimal/pre
+    pre-run: playbooks/base/pre
     post-run:
       - playbooks/base/post-ssh
-      - playbooks/base/post-logs
     roles:
       - zuul: theopenlab/zuul-jobs
     timeout: 1800
