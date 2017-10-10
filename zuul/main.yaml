@@ -8,8 +8,8 @@
           # Order matters, load common job repos first
           - theopenlab/zuul-jobs:
               shadow: theopenlab/project-config
-          #- openstack-infra/openstack-zuul-jobs
-          #- openstack-infra/openstack-zuul-roles
+          - theopenlab/openstack-zuul-jobs
+          - theopenlab/openstack-zuul-roles
           # devstack-gate, devsack and tempest all define things expected
           # to be widely used.
           #- openstack-infra/devstack-gate
