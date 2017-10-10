@@ -12,3 +12,9 @@
     check:
       jobs:
         - noop
+
+- project:
+    name: theopenlab/requirements
+    check:
+      jobs:
+        - noop
