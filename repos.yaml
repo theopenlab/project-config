@@ -1,0 +1,12 @@
+- project: openstack/cinder
+  description: OpenStack Block Storage (Cinder)
+- project: openstack/glance
+  description: OpenStack Image Management (Glance)
+- project: openstack/horizon
+  description: OpenStack Dashboard (Horizon)
+- project: openstack/keystone
+  description: OpenStack Identity (Keystone)
+- project: openstack/neutron
+  description: OpenStack Networking (Neutron)
+- project: openstack/nova
+  description: OpenStack Compute (Nova)
