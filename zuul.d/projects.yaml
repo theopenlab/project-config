@@ -1,14 +1,14 @@
 # Shared zuul config specific to the OpenStack Project
 # Contains project pipeline definitions
 
-- project:
-    name: theopenlab/gophercloud
-    check:
-      jobs:
-        - noop
+#- project:
+#    name: theopenlab/gophercloud
+#    check:
+#      jobs:
+#        - noop
 
-- project:
-    name: theopenlab/cicd
-    check:
-      jobs:
-        - noop
+#- project:
+#    name: theopenlab/cicd
+#    check:
+#      jobs:
+#        - noop
