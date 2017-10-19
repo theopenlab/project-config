@@ -13,7 +13,6 @@
       - playbooks/base/post-ssh
     roles:
       - zuul: theopenlab/zuul-jobs
-      - zuul: theopenlab/gophercloud-jobs
     timeout: 1800
     nodeset:
       nodes:
