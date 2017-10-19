@@ -2,3 +2,9 @@
   roles:
     - add-build-sshkey
     - start-zuul-console
+    - validate-host
+    - use-cached-repos
+    - mirror-workspace-git-repos
+    - role: fetch-zuul-cloner
+      destination: "/usr/zuul-env/bin/zuul-cloner"
+      repo_src_dir: "/home/zuul/src/git.openstack.org"
