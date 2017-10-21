@@ -11,7 +11,7 @@
     pre-run: playbooks/base/pre
     post-run:
       - playbooks/base/post-ssh
-#      - playbooks/base/post-logs
+      - playbooks/base/post-logs
     roles:
       - zuul: theopenlab/zuul-jobs
     timeout: 1800
@@ -19,8 +19,8 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
-#    secrets:
-#      - site_logs
+    secrets:
+      - site_logs
 
 - semaphore:
     name: wheel-mirror
