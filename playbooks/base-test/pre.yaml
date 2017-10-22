@@ -1,7 +1,7 @@
 - hosts: localhost
   roles:
     - role: emit-job-header
-      zuul_log_url: "http://logs.openstack.org"
+      zuul_log_url: "http://80.158.20.68"
 
 - hosts: all
   roles:
@@ -14,4 +14,4 @@
     - configure-mirrors
     - role: fetch-zuul-cloner
       destination: "/usr/zuul-env/bin/zuul-cloner"
-      repo_src_dir: "/home/zuul/src/git.openstack.org"
+      repo_src_dir: "/home/zuul/src/github.com"
