@@ -8,7 +8,7 @@
   gather_facts: False
   roles:
     - role: upload-logs
-      zuul_log_url: "http://logs.openstack.org"
+      zuul_log_url: "http://80.158.20.68"
 
 - hosts: localhost
   roles:
