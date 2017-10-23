@@ -18,8 +18,8 @@
       - playbooks/base/post-logs
     roles:
       - zuul: theopenlab/zuul-jobs
-    vars:
-      ara_generate_html: failure
+#    vars:
+#      ara_generate_html: failure
     timeout: 1800
 #    secrets:
 #      - site_logs
