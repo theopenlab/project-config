@@ -2,18 +2,24 @@
     name: base
     parent: null
     description: |
-      A subset of what the 'base' job provides: the absolute minimum considered
-      required to run for any one job.
-      It doesn't set up cached git repositories, will not set up mirrors,
-      doesn't validate the node and does not generate an ARA report.
-      These tasks, if required, can be included by the dependant jobs
-      themselves on a need basis.
+      The base job for OpenStack's installation of Zuul.
+      
+      All jobs ultimately inherit from this.  It runs a pre-playbook
+      which copies all of the job's prepared git repos on to all of
+      the nodes in the nodeset.  It runs a post-playbook which copies
+      all of the files in the logs/ subdirectory of the executor
+      work directory to the logserver.
+      
+      It also sets default timeout and nodeset values (which may be
+      overidden).
     pre-run: playbooks/base/pre
     post-run:
       - playbooks/base/post-ssh
       - playbooks/base/post-logs
     roles:
       - zuul: theopenlab/zuul-jobs
+    vars:
+      ara_generate_html: failure
     timeout: 1800
     nodeset:
       nodes:
