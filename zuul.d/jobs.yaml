@@ -21,8 +21,8 @@
     vars:
       ara_generate_html: failure
     timeout: 1800
-    secrets:
-      - site_logs
+#    secrets:
+#      - site_logs
       
 # See the procedure described above "base" before making changes to
 # this job.
@@ -41,8 +41,8 @@
     vars:
       ara_generate_html: failure
     timeout: 1800
-    secrets:
-      - site_logs
+#    secrets:
+#      - site_logs
 
 - semaphore:
     name: wheel-mirror
