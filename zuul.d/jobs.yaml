@@ -13,7 +13,7 @@
       - playbooks/base/post-ssh
 #      - playbooks/base/post-logs
     roles:
-      - zuul: theopenlab/zuul-jobs
+      - zuul: liu-sheng/zuul-jobs
     timeout: 1800
     nodeset:
       nodes:

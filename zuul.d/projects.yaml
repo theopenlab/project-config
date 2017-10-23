@@ -2,13 +2,13 @@
 # Contains project pipeline definitions
 
 - project:
-    name: theopenlab/gophercloud
+    name: liu-sheng/gophercloud
 #    check:
 #      jobs:
 #        - noop
 
 - project:
-    name: theopenlab/cicd
+    name: liu-sheng/cicd
 #    check:
 #      jobs:
 #        - noop
