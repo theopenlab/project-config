@@ -21,10 +21,6 @@
     vars:
       ara_generate_html: failure
     timeout: 1800
-    nodeset:
-      nodes:
-        - name: ubuntu-xenial
-          label: ubuntu-xenial
     secrets:
       - site_logs
       
@@ -45,10 +41,6 @@
     vars:
       ara_generate_html: failure
     timeout: 1800
-    nodeset:
-      nodes:
-        - name: ubuntu-xenial
-          label: ubuntu-xenial
     secrets:
       - site_logs
 
