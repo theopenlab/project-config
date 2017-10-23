@@ -48,13 +48,3 @@
     ignore-dependencies: true
     precedence: low
     trigger: {}
-
-- pipeline:
-    name: overcommit
-    description: >
-      Runs every five minutes. I can be removed for production
-      this is only for testing.
-    manager: independent
-    trigger:
-      timer:
-        - time: '*/5 * * * *'
