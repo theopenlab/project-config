@@ -26,21 +26,21 @@
       
 # See the procedure described above "base" before making changes to
 # this job.
-- job:
-    name: base-test
-    parent: null
-    description: |
-      A job to test changes to the base job without disturbing the
-      main job in production.  Not for general use.
-    pre-run: playbooks/base-test/pre
-    post-run:
-      - playbooks/base-test/post-ssh
-      - playbooks/base-test/post-logs
-    roles:
-      - zuul: theopenlab/zuul-jobs
-    vars:
-      ara_generate_html: failure
-    timeout: 1800
+#- job:
+#    name: base-test
+#    parent: null
+#    description: |
+#      A job to test changes to the base job without disturbing the
+#      main job in production.  Not for general use.
+#    pre-run: playbooks/base-test/pre
+#    post-run:
+#      - playbooks/base-test/post-ssh
+#      - playbooks/base-test/post-logs
+#    roles:
+#      - zuul: theopenlab/zuul-jobs
+#    vars:
+#      ara_generate_html: failure
+#    timeout: 1800
 #    secrets:
 #      - site_logs
 
