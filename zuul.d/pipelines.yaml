@@ -29,6 +29,28 @@
         status: 'failure'
 
 - pipeline:
+    name: recheck-mitaka
+    description: |
+      Commenting "recheck stable/mitaka" enter this pipeline to run tests on
+      stable/mitaka of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+stable\/mitaka\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+    failure:
+      github:
+        status: 'failure'
+
+- pipeline:
     name: recheck-pike
     description: |
       Commenting "recheck stable/pike" enter this pipeline to run tests on
