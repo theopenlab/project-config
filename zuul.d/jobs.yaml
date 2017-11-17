@@ -19,8 +19,8 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
-    #secrets:
-      #- site_logs
+    secrets:
+      - site_logs
 
 #- job:
 #    name: base
