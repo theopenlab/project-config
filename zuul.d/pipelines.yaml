@@ -51,6 +51,50 @@
         status: 'failure'
 
 - pipeline:
+    name: recheck-newton
+    description: |
+      Commenting "recheck stable/newton" enter this pipeline to run tests on
+      stable/newton of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+stable\/newton\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+    failure:
+      github:
+        status: 'failure'
+
+- pipeline:
+    name: recheck-ocata
+    description: |
+      Commenting "recheck stable/ocata" enter this pipeline to run tests on
+      stable/ocata of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+stable\/ocata\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+    failure:
+      github:
+        status: 'failure'
+
+- pipeline:
     name: recheck-pike
     description: |
       Commenting "recheck stable/pike" enter this pipeline to run tests on
