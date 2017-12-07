@@ -136,3 +136,31 @@
     ignore-dependencies: true
     precedence: low
     trigger: {}
+
+- pipeline:
+    name: check-telefonica
+    post-review: true
+    description: |
+      Commenting "recheck telefonica" enter this pipeline to run tests on
+      telefonica cloud and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+#        - event: pull_request
+#          action:
+#            - opened
+#            - changed
+#            - reopened
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+telefonica\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+    failure:
+      github:
+        status: 'failure'
