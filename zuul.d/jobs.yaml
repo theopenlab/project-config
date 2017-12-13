@@ -10,8 +10,8 @@
       themselves on a need basis.
     pre-run: playbooks/base/pre
     post-run:
-      - playbooks/base/post-ssh
-      - playbooks/base/post-logs
+      - playbooks/base/post-ssh.yaml
+      - playbooks/base/post-logs.yaml
     roles:
       - zuul: theopenlab/zuul-jobs
     timeout: 1800
