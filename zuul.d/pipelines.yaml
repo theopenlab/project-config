@@ -24,9 +24,11 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
 
 - pipeline:
     name: recheck-mitaka
@@ -46,9 +48,11 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
 
 - pipeline:
     name: recheck-newton
@@ -68,9 +72,11 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
 
 - pipeline:
     name: recheck-ocata
@@ -90,9 +96,11 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
 
 - pipeline:
     name: recheck-pike
@@ -112,9 +120,11 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
 
 - pipeline:
     name: periodic
@@ -161,6 +171,8 @@
     success:
       github:
         status: 'success'
+      mysql:
     failure:
       github:
         status: 'failure'
+      mysql:
