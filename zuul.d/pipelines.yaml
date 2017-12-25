@@ -176,3 +176,27 @@
       github:
         status: 'failure'
       mysql:
+
+- pipeline:
+    name: recheck-designate
+    description: |
+      Commenting "recheck designate" enter this pipeline to run designate tests
+      on master of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+designate\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
