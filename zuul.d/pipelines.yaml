@@ -224,3 +224,33 @@
       github:
         status: 'failure'
       mysql:
+
+- pipeline:
+    name: check-orange
+    post-review: true
+    description: |
+      Commenting "recheck orange" enter this pipeline to run tests on
+      orange cloud and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+#        - event: pull_request
+#          action:
+#            - opened
+#            - changed
+#            - reopened
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+orange\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
