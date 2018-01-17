@@ -139,10 +139,6 @@
       mysql:
     failure:
       mysql:
-      smtp:
-        from: zuul@openlabtesting.org
-        to: liusheng1175@gmail.com
-        subject: 'Periodic check of {change.project} failed'
 
 - pipeline:
     name: merge-check
