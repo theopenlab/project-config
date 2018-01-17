@@ -134,7 +134,15 @@
     precedence: low
     trigger:
       timer:
-        - time: '0 6 * * *'
+        - time: '30 7 * * *'
+    success:
+      mysql:
+    failure:
+      mysql:
+      smtp:
+        from: zuul@openlabtesting.org
+        to: liusheng1175@gmail.com
+        subject: 'Periodic check of {change.project} failed'
 
 - pipeline:
     name: merge-check
