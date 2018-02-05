@@ -254,6 +254,30 @@
       mysql:
 
 - pipeline:
+    name: recheck-fwaas
+    description: |
+      Commenting "recheck fwaas" enter this pipeline to run fwaas tests
+      on master of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+fwaas\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
+
+- pipeline:
     name: check-orange
     post-review: true
     description: |
