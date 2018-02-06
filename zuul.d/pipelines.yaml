@@ -230,6 +230,30 @@
       mysql:
 
 - pipeline:
+    name: recheck-lbaas
+    description: |
+      Commenting "recheck lbaas" enter this pipeline to run lbaas tests
+      on master of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+lbaas\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
+
+- pipeline:
     name: check-orange
     post-review: true
     description: |
