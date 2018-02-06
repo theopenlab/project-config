@@ -282,3 +282,28 @@
       github:
         status: 'failure'
       mysql:
+
+- pipeline:
+    name: check-generic-cloud
+    post-review: true
+    description: |
+      Commenting "recheck" enter this pipeline to run tests against
+      generic clouds and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
