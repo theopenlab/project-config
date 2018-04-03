@@ -127,6 +127,30 @@
       mysql:
 
 - pipeline:
+    name: recheck-queens
+    description: |
+      Commenting "recheck stable/queens" enter this pipeline to run tests on
+      stable/queens of OpenStack and receive an initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s+stable\/queens\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
+
+- pipeline:
     name: periodic
     description: Jobs in this queue are triggered on a timer.
     manager: independent
