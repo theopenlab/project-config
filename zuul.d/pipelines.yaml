@@ -500,3 +500,28 @@
       github:
         status: 'failure'
       mysql:
+
+- pipeline:
+    name: cloud-provider-openstack-e2e-conformance
+    description: |
+      Commenting "/test cloud-provider-openstack-e2e-conformance" enter this pipeline to run
+      the tests job of Kubernetes+OpenStack E2E conformance test scenarios and receive an initial
+      +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test cloud-provider-openstack-e2e-conformance\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
