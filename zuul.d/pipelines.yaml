@@ -295,10 +295,11 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-all
+    name: cloud-provider-openstack-unittest
     description: |
-      Commenting "/retest" or "/test all" enter this pipeline to run all the test jobs of
-      Kubernetes+OpenStack scenarios and receive an initial +/-1 Verified vote.
+      Commenting "/test cloud-provider-openstack-unittest" enter this pipeline to run
+      the unit tests of cloud-provider-openstack repo and receive an initial
+      +/-1 Verified vote.
     manager: independent
     trigger:
       github:
@@ -309,10 +310,7 @@
             - reopened
         - event: pull_request
           action: comment
-          comment: (?i)^\s*\/retest\s*$
-        - event: pull_request
-          action: comment
-          comment: (?i)^\s*\/test all\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-unittest\s*$
     start:
       github:
         status: pending
@@ -327,42 +325,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-unit
+    name: cloud-provider-openstack-acceptance-test-lb-octavia
     description: |
-      Commenting "/test cloud-provider-openstack-unit" enter this pipeline to run
-      the unit tests of cloud-provider-openstack repo and receive an initial
-      +/-1 Verified vote.
-    manager: independent
-    trigger:
-      github:
-        - event: pull_request
-          action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-unit\s*$
-    start:
-      github:
-        status: pending
-        comment: false
-    success:
-      github:
-        status: 'success'
-      mysql:
-    failure:
-      github:
-        status: 'failure'
-      mysql:
-
-- pipeline:
-    name: cloud-provider-openstack-lb
-    description: |
-      Commenting "/test cloud-provider-openstack-lb" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-lb-octavia" enter this pipeline to run
       the test job of Kubernetes+OpenStack LBaaS scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-lb\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-lb-octavia\s*$
     start:
       github:
         status: pending
@@ -377,17 +355,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-auth
+    name: cloud-provider-openstack-acceptance-test-keystone-authentication-authorization
     description: |
-      Commenting "/test cloud-provider-openstack-auth" enter this pipeline to run
-      the tests job of Kubernetes+OpenStack Keystone authentication/authorication
+      Commenting "/test cloud-provider-openstack-acceptance-test-keystone-authentication-authorization" enter this
+      pipeline to run the tests job of Kubernetes+OpenStack Keystone authentication/authorication
       scenarios and receive an initial +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-auth\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-keystone-authentication-authorization\s*$
     start:
       github:
         status: pending
@@ -402,17 +385,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-k8s-cinder
+    name: cloud-provider-openstack-acceptance-test-k8s-cinder
     description: |
-      Commenting "/test cloud-provider-openstack-k8s-cinder" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-k8s-cinder" enter this pipeline to run
       the tests job of Kubernetes+OpenStack cinder scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-k8s-cinder\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-k8s-cinder\s*$
     start:
       github:
         status: pending
@@ -427,17 +415,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-standalone-cinder
+    name: cloud-provider-openstack-acceptance-test-standalone-cinder
     description: |
-      Commenting "/test cloud-provider-openstack-standalone-cinder" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-standalone-cinder" enter this pipeline to run
       the tests job of Kubernetes+OpenStack Cinder standalone scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-standalone-cinder\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-standalone-cinder\s*$
     start:
       github:
         status: pending
@@ -452,17 +445,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-csi-cinder
+    name: cloud-provider-openstack-acceptance-test-csi-cinder
     description: |
-      Commenting "/test cloud-provider-openstack-csi-cinder" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-csi-cinder" enter this pipeline to run
       the tests job of Kubernetes+OpenStack Cinder CSI scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-csi-cinder\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-csi-cinder\s*$
     start:
       github:
         status: pending
@@ -477,17 +475,22 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-flexvolume-cinder
+    name: cloud-provider-openstack-acceptance-test-flexvolume-cinder
     description: |
-      Commenting "/test cloud-provider-openstack-flexvolume-cinder" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-flexvolume-cinder" enter this pipeline to run
       the tests job of Kubernetes+OpenStack Cinder flexvolume scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-flexvolume-cinder\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-flexvolume-cinder\s*$
     start:
       github:
         status: pending
@@ -502,17 +505,52 @@
       mysql:
 
 - pipeline:
-    name: cloud-provider-openstack-e2e-conformance
+    name: cloud-provider-openstack-acceptance-test-e2e-conformance
     description: |
-      Commenting "/test cloud-provider-openstack-e2e-conformance" enter this pipeline to run
+      Commenting "/test cloud-provider-openstack-acceptance-test-e2e-conformance" enter this pipeline to run
       the tests job of Kubernetes+OpenStack E2E conformance test scenarios and receive an initial
       +/-1 Verified vote.
     manager: independent
     trigger:
       github:
         - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
           action: comment
-          comment: (?i)^\s*\/test cloud-provider-openstack-e2e-conformance\s*$
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-e2e-conformance\s*$
+    start:
+      github:
+        status: pending
+        comment: false
+    success:
+      github:
+        status: 'success'
+      mysql:
+    failure:
+      github:
+        status: 'failure'
+      mysql:
+
+- pipeline:
+    name: cloud-provider-openstack-acceptance-test-e2e-conformance-stable-branch-v1.10
+    description: |
+      Commenting "/test cloud-provider-openstack-acceptance-test-e2e-conformance-stable-branch-v1.10" enter this
+      pipeline to run the tests job of Kubernetes+OpenStack E2E conformance test scenarios and receive an initial
+      +/-1 Verified vote.
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-e2e-conformance-stable-branch-v1\.10\s*$
     start:
       github:
         status: pending
