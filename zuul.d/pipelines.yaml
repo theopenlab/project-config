@@ -311,6 +311,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-unittest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -341,6 +347,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-lb-octavia\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -371,6 +383,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-keystone-authentication-authorization\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -401,6 +419,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-k8s-cinder\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -431,6 +455,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-standalone-cinder\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -461,6 +491,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-csi-cinder\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -491,6 +527,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-flexvolume-cinder\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -521,6 +563,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-e2e-conformance\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
@@ -551,6 +599,12 @@
         - event: pull_request
           action: comment
           comment: (?i)^\s*\/test cloud-provider-openstack-acceptance-test-e2e-conformance-stable-branch-v1\.10\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/retest\s*$
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*\/test all\s*$
     start:
       github:
         status: pending
