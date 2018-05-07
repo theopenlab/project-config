@@ -19,6 +19,7 @@ import yaml
 from collections import OrderedDict
 import projectconfig_yamllib as pcy
 
+
 def main():
     yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
                          pcy.construct_yaml_map)
@@ -30,7 +31,7 @@ def main():
 
     for project in data:
         if ('upstream' in project and
-            'track-upstream' not in project.get('options', [])):
+                'track-upstream' not in project.get('options', [])):
             del project['upstream']
 
     with open('gerrit/projects.yaml', 'w') as out:

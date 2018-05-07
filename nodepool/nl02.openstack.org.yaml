@@ -1,0 +1,221 @@
+elements-dir: /etc/nodepool/elements
+images-dir: /opt/nodepool_dib
+
+zookeeper-servers:
+  - host: nodepool.openstack.org
+    port: 2181
+
+# NOTE(pabelanger): To avoid a race conditions between multiple launchers, only
+# nl01.o.o will manage min-ready of our labels.  If nl01.o.o is ever disabled,
+# another launcher will need to assume this logic.
+labels:
+  - name: centos-7
+  - name: debian-stretch
+  - name: fedora-27
+  - name: fedora-28
+  - name: opensuse-423
+  - name: opensuse-tumbleweed
+  - name: ubuntu-bionic
+  - name: ubuntu-trusty
+  - name: ubuntu-xenial
+
+providers:
+  - name: citycloud-kna1
+    region-name: 'Kna1'
+    cloud: citycloud
+    boot-timeout: 120
+    launch-timeout: 600
+    clean-floating-ips: true
+    rate: 0.25
+    diskimages: &provider_diskimages
+      - name: centos-7
+        config-drive: true
+      - name: debian-stretch
+        config-drive: true
+      - name: fedora-27
+        config-drive: true
+      - name: fedora-28
+        config-drive: true
+      - name: opensuse-423
+        config-drive: true
+      - name: opensuse-tumbleweed
+        config-drive: true
+      - name: ubuntu-bionic
+        config-drive: true
+      - name: ubuntu-trusty
+        config-drive: true
+      - name: ubuntu-xenial
+        config-drive: true
+    pools:
+      - name: main
+        # Disabled until 2018-07-01 at request of citycloud.
+        # We should contact them before reenabling at this date.
+        max-servers: 0
+        availability-zones:
+          - nova
+        labels: &provider_pools_labels
+          - name: centos-7
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: centos-7
+            key-name: infra-root-keys
+          - name: debian-stretch
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: debian-stretch
+            key-name: infra-root-keys
+          - name: fedora-27
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: fedora-27
+            key-name: infra-root-keys
+          - name: fedora-28
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: fedora-28
+            key-name: infra-root-keys
+          - name: opensuse-423
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: opensuse-423
+            key-name: infra-root-keys
+          - name: opensuse-tumbleweed
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: opensuse-tumbleweed
+            key-name: infra-root-keys
+          - name: ubuntu-bionic
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: ubuntu-bionic
+            key-name: infra-root-keys
+          - name: ubuntu-trusty
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: ubuntu-trusty
+            key-name: infra-root-keys
+          - name: ubuntu-xenial
+            min-ram: 8000
+            flavor-name: '8C-8GB-100GB'
+            diskimage: ubuntu-xenial
+            key-name: infra-root-keys
+
+  - name: citycloud-la1
+    region-name: 'La1'
+    cloud: citycloud
+    boot-timeout: 120
+    launch-timeout: 600
+    clean-floating-ips: true
+    rate: 0.25
+    diskimages: *provider_diskimages
+    pools:
+      - name: main
+        # Disabled until 2018-07-01 at request of citycloud.
+        # We should contact them before reenabling at this date.
+        max-servers: 0
+        availability-zones:
+          - nova
+        labels: *provider_pools_labels
+
+  - name: citycloud-lon1
+    region-name: 'Lon1'
+    cloud: citycloud
+    boot-timeout: 120
+    launch-timeout: 600
+    clean-floating-ips: true
+    rate: 0.25
+    diskimages: *provider_diskimages
+    pools:
+      - name: main
+        # Disabled until 2018-07-01 at request of citycloud.
+        # We should contact them before reenabling at this date.
+        max-servers: 0
+        availability-zones:
+          - nova
+        labels: *provider_pools_labels
+
+  - name: citycloud-sto2
+    region-name: 'Sto2'
+    cloud: citycloud
+    boot-timeout: 120
+    launch-timeout: 600
+    clean-floating-ips: true
+    rate: 0.25
+    diskimages: *provider_diskimages
+    pools:
+      - name: main
+        # Disabled until 2018-07-01 at request of citycloud.
+        # We should contact them before reenabling at this date.
+        max-servers: 0
+        availability-zones:
+          - nova
+        labels: *provider_pools_labels
+
+  - name: limestone-regionone
+    region-name: 'RegionOne'
+    cloud: limestone
+    boot-timeout: 120
+    launch-timeout: 300
+    rate: 0.01
+    diskimages: *provider_diskimages
+    pools:
+      - name: main
+        max-servers: 30
+        labels:
+          - name: centos-7
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: centos-7
+            key-name: infra-root-keys
+          - name: debian-stretch
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: debian-stretch
+            key-name: infra-root-keys
+          - name: fedora-27
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: fedora-27
+            key-name: infra-root-keys
+          - name: fedora-28
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: fedora-28
+            key-name: infra-root-keys
+          - name: opensuse-423
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: opensuse-423
+            key-name: infra-root-keys
+          - name: opensuse-tumbleweed
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: opensuse-tumbleweed
+            key-name: infra-root-keys
+          - name: ubuntu-bionic
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: ubuntu-bionic
+            key-name: infra-root-keys
+          - name: ubuntu-trusty
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: ubuntu-trusty
+            key-name: infra-root-keys
+          - name: ubuntu-xenial
+            min-ram: 8000
+            flavor-name: 'nodepool.0'
+            diskimage: ubuntu-xenial
+            key-name: infra-root-keys
+
+diskimages:
+  - name: centos-7
+  - name: debian-stretch
+  - name: fedora-27
+  - name: fedora-28
+  - name: gentoo
+  - name: opensuse-423
+  - name: opensuse-tumbleweed
+  - name: ubuntu-bionic
+  - name: ubuntu-trusty
+  - name: ubuntu-xenial

@@ -1,4 +1,28 @@
 - hosts: all
+  pre_tasks:
+    - name: Install git-review
+      command: pip install git-review
+      become: yes
+
+    - name: Copy scripts to the script dir on the node
+      copy:
+        dest: '{{ ansible_user_dir }}/scripts/'
+        src: '{{ item }}'
+        mode: 0755
+      with_items:
+        - generate_puppetfile.sh
+        - propose_update.sh
+        - sync_openstack_ansible_common_files.sh
+
   roles:
-    - legacy-copy-project-config-scripts
+    - role: configure-git
+      git_config:
+        user.name: OpenStack Proposal Bot
+        user.email: openstack-infra@lists.openstack.org
+        gitreview.username: proposal-bot
+    - copy-proposal-common-scripts
+      # For propose-update-constraints
+    - copy-release-tools-scripts
     - add-sshkey
+    - bindep
+    - ensure-tox

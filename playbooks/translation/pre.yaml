@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - role: ensure-sphinx
+      doc_building_packages:
+        - sphinx
+        - reno
+    - ensure-babel
+    - copy-proposal-common-scripts

@@ -1,3 +1,5 @@
 - hosts: all
   roles:
-    - remove-launchpadlib-credentials
+    - remove-sshkey
+    - remove-launchpad-credentials
+    - remove-gpgkey

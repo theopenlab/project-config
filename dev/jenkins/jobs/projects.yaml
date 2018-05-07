@@ -1,0 +1,11 @@
+#
+# The projects in this file are sorted alphabetically.
+#
+
+- project:
+    name: noop
+
+    jobs:
+      - '{pipeline}-noop':
+          pipeline: gate
+          node: ubuntu-xenial

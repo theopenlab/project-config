@@ -1,0 +1,325 @@
+elements-dir: /etc/nodepool/elements
+images-dir: /opt/nodepool_dib
+
+zookeeper-servers:
+  - host: nodepool.openstack.org
+    port: 2181
+
+providers:
+  - name: citycloud-kna1
+    region-name: 'Kna1'
+    cloud: citycloud
+    rate: 0.25
+    # Disabled until 2018-07-01 at request of citycloud.
+    # We should contact them before reenabling at this date.
+    diskimages: []
+
+  - name: citycloud-la1
+    region-name: 'La1'
+    cloud: citycloud
+    rate: 0.25
+    diskimages: []
+
+  - name: citycloud-lon1
+    region-name: 'Lon1'
+    cloud: citycloud
+    rate: 0.25
+    diskimages: []
+
+  - name: citycloud-sto2
+    region-name: 'Sto2'
+    cloud: citycloud
+    rate: 0.25
+    diskimages: []
+
+  - name: ovh-bhs1
+    region-name: 'BHS1'
+    cloud: ovh
+    rate: 0.1
+    diskimages: &provider_diskimages
+      - name: centos-7
+        config-drive: true
+      - name: debian-stretch
+        config-drive: true
+      - name: fedora-27
+        config-drive: true
+      - name: fedora-28
+        config-drive: true
+      - name: gentoo-17-0-systemd
+        config-drive: true
+      - name: opensuse-423
+        config-drive: true
+      - name: opensuse-tumbleweed
+        config-drive: true
+      - name: ubuntu-bionic
+        config-drive: true
+      - name: ubuntu-trusty
+        config-drive: true
+      - name: ubuntu-xenial
+        config-drive: true
+
+  - name: ovh-gra1
+    region-name: 'GRA1'
+    cloud: ovh
+    rate: 0.1
+    diskimages: *provider_diskimages
+
+  - name: inap-mtl01
+    region-name: 'mtl01'
+    cloud: inap
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+  - name: rax-dfw
+    region-name: 'DFW'
+    cloud: rax
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+  - name: rax-iad
+    region-name: 'IAD'
+    cloud: rax
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+  - name: rax-ord
+    region-name: 'ORD'
+    cloud: rax
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+  - name: vexxhost-ca-ymq-1
+    region-name: 'ca-ymq-1'
+    cloud: vexxhost
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+  - name: limestone-regionone
+    region-name: 'RegionOne'
+    cloud: limestone
+    rate: 0.001
+    diskimages: *provider_diskimages
+
+diskimages:
+  - name: centos-7
+    pause: false
+    elements:
+      - centos-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+      - epel
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_EPEL_DISABLED: '1'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: debian-stretch
+    pause: false
+    elements:
+      - debian-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+    release: stretch
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/debian'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_GRUB_TIMEOUT: '0'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: fedora-27
+    pause: false
+    elements:
+      - fedora-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - initialize-urandom
+      - growroot
+      - infra-package-needs
+    release: 27
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: fedora-28
+    pause: false
+    elements:
+      - fedora-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - initialize-urandom
+      - growroot
+      - infra-package-needs
+    release: 28
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: gentoo-17-0-systemd
+    pause: true
+    elements:
+      - gentoo
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - growroot
+      - infra-package-needs
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      GENTOO_PYTHON_TARGETS: 'python2_7 python3_5'
+      GENTOO_PYTHON_ACTIVE_VERSION: python3.5
+      GENTOO_PROFILE: 'default/linux/amd64/17.0/systemd'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: opensuse-423
+    pause: false
+    elements:
+      - opensuse-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+    release: '42.3'
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/opensuse'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: opensuse-tumbleweed
+    pause: false
+    elements:
+      - opensuse-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+    release: 'tumbleweed'
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/opensuse'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: ubuntu-bionic
+    pause: false
+    elements:
+      - ubuntu-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+    release: bionic
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/ubuntu'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_DEBIAN_COMPONENTS: 'main,universe'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: ubuntu-trusty
+    pause: false
+    elements:
+      - ubuntu-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - growroot
+      - infra-package-needs
+    release: trusty
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/ubuntu'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_DEBIAN_COMPONENTS: 'main,universe'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+  - name: ubuntu-xenial
+    pause: false
+    elements:
+      - ubuntu-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - cache-devstack
+      - initialize-urandom
+      - growroot
+      - infra-package-needs
+    release: xenial
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/ubuntu'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_DEBIAN_COMPONENTS: 'main,universe'
+      GIT_HTTP_LOW_SPEED_TIME: '300'
+      GIT_HTTP_LOW_SPEED_LIMIT: '1000'

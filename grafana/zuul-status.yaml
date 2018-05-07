@@ -1,0 +1,216 @@
+dashboard:
+  title: Zuul Status
+  rows:
+    - title: Description
+      height: 100px
+      panels:
+        - title: Description
+          content: |
+            **This dashboard is managed by [Grafyaml](http://docs.openstack.org/infra/system-config/grafyaml.html).**
+
+            If you would like to make changes to this dashboard, please see the grafana directory in [project-config](https://git.openstack.org/cgit/openstack-infra/project-config/tree/grafana/zuul-status.yaml).
+          type: text
+    - title: Pipelines
+      height: 150px
+      panels:
+        - title: Check
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+            - target: stats.gauges.zuul.tenant.openstack.pipeline.check.current_changes
+          type: singlestat
+          valueName: current
+        - title: Gate
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+            - target: stats.gauges.zuul.tenant.openstack.pipeline.gate.current_changes
+          type: singlestat
+          valueName: current
+        - title: Post
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+            - target: stats.gauges.zuul.tenant.openstack.pipeline.post.current_changes
+          type: singlestat
+        - title: Release-Post
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+            - target: stats.gauges.zuul.tenant.openstack.pipeline.release-post.current_changes
+          type: singlestat
+          valueName: current
+          valueName: current
+        - title: Tag
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.tag.current_changes
+          type: singlestat
+          valueName: current
+        - title: Pre-Release
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.pre-release.current_changes
+          type: singlestat
+          valueName: current
+        - title: Release
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.release.current_changes
+          type: singlestat
+          valueName: current
+        - title: Experimental
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.experimental.current_changes
+          type: singlestat
+          valueName: current
+        - title: Periodic
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.periodic.current_changes
+          type: singlestat
+          valueName: current
+        - title: Periodic-Stable
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.periodic-stable.current_changes
+          type: singlestat
+          valueName: current
+        - title: Merge-Check
+          span: 2
+          sparkline:
+            full: true
+            show: true
+          targets:
+              - target: stats.gauges.zuul.tenant.openstack.pipeline.merge-check.current_changes
+          type: singlestat
+          valueName: current
+      showTitle: true
+    - title: Graphs
+      height: 250px
+      panels:
+        - title: Zuul Jobs Launched (per Hour)
+          span: 4
+          targets:
+            - target: alias(summarize(sumSeries(stats_counts.zuul.tenant.openstack.pipeline.*.all_jobs), '1h'), 'All Jobs')
+          type: graph
+        - title: Logstash Job Queue
+          span: 4
+          targets:
+            - target: alias(stats.gauges.logstash.geard.queue.running, 'Running')
+            - target: alias(stats.gauges.logstash.geard.queue.waiting, 'Waiting')
+            - target: alias(stats.gauges.logstash.geard.queue.total, 'Total Jobs')
+          type: graph
+        - title: Node Requests
+          span: 4
+          targets:
+            - target: alias(stats.gauges.zuul.nodepool.current_requests, 'Requests')
+          type: graph
+        - title: Zuul Job Queue
+          span: 4
+          targets:
+            - target: alias(stats.gauges.zuul.geard.queue.running, 'Running')
+            - target: alias(stats.gauges.zuul.geard.queue.waiting, 'Waiting')
+            - target: alias(stats.gauges.zuul.geard.queue.total, 'Total Jobs')
+          type: graph
+        - title: Gerrit Events (per Hour)
+          span: 4
+          targets:
+            - target: alias(summarize(stats_counts.zuul.event.gerrit.comment-added, '1h'), 'Comment added')
+            - target: alias(summarize(stats_counts.zuul.event.gerrit.patchset-created, '1h'), 'Patchset created')
+            - target: alias(summarize(stats_counts.zuul.event.gerrit.change-merged, '1h'), 'Change merged')
+          type: graph
+        - title: Test Nodes
+          span: 4
+          stack: true
+          tooltip:
+            value_type: individual
+          targets:
+            - target: alias(stats.gauges.nodepool.nodes.building, 'Building')
+            - target: alias(stats.gauges.nodepool.nodes.ready, 'Available')
+            - target: alias(stats.gauges.nodepool.nodes.in-use, 'In Use')
+            - target: alias(stats.gauges.nodepool.nodes.used, 'Used')
+            - target: alias(stats.gauges.nodepool.nodes.deleting, 'Deleting')
+            - target: alias(sumSeries(stats.gauges.nodepool.provider.*.max_servers), 'Max')
+          seriesOverrides:
+            - alias: Max
+              stack: False
+          type: graph
+    - title: Executors
+      showTitle: true
+      height: 250px
+      panels:
+        - title: Executors
+          span: 6
+          targets:
+            - target: alias(stats.gauges.zuul.executors.online, 'Online')
+            - target: alias(stats.gauges.zuul.executors.accepting, 'Accepting')
+          type: graph
+        - title: Running Builds
+          span: 6
+          targets:
+            - target: aliasByNode(stats.gauges.zuul.executor.*.running_builds, 4)
+          type: graph
+        - title: Executor Queue
+          span: 6
+          targets:
+            - target: alias(stats.gauges.zuul.executors.jobs_queued, 'Queued Jobs')
+            - target: alias(stats.gauges.zuul.executors.jobs_running, 'Running Jobs')
+          type: graph
+        - title: Load Average
+          span: 6
+          targets:
+            - target: aliasByNode(scale(stats.gauges.zuul.executor.*.load_average, 0.01), 4)
+          type: graph
+        - title: Starting Builds
+          span: 6
+          targets:
+            - target: aliasByNode(stats.gauges.zuul.executor.*.starting_builds, 4)
+          type: graph
+        - title: Used RAM
+          span: 6
+          targets:
+            - target: aliasByNode(scale(stats.gauges.zuul.executor.*.pct_used_ram, 0.01), 4)
+          type: graph
+    - title: Mergers
+      showTitle: true
+      height: 250px
+      panels:
+        - title: Mergers
+          span: 6
+          targets:
+            - target: alias(stats.gauges.zuul.mergers.online, 'Online')
+          type: graph
+        - title: Merger Queue
+          span: 6
+          targets:
+            - target: alias(stats.gauges.zuul.mergers.jobs_queued, 'Queued Jobs')
+            - target: alias(stats.gauges.zuul.mergers.jobs_running, 'Running Jobs')
+          type: graph

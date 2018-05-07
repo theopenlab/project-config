@@ -58,7 +58,10 @@ out = ''
 
 valid_keys = {'abandon',
               'access',
+              'copyAllScoresIfNoCodeChange',
               'copyAllScoresOnTrivialRebase',
+              'copyMaxScore',
+              'copyMinScore',
               'create',
               'defaultValue',
               'exclusiveGroupPermissions',
@@ -66,6 +69,7 @@ valid_keys = {'abandon',
               'forgeCommitter',
               'function',
               'label-Code-Review',
+              'label-Review-Priority',
               'label-Rollcall-Vote',
               'label-Workflow',
               'label-Verified',
@@ -76,8 +80,7 @@ valid_keys = {'abandon',
               'requireChangeId',
               'requireContributorAgreement',
               'state',
-              'value'
-}
+              'value'}
 
 if '0' in transformations or not transformations:
     dry_run = True

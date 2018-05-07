@@ -1,0 +1,5 @@
+- hosts: all
+  roles:
+    - fetch-javascript-output
+    - fetch-javascript-content-tarball
+

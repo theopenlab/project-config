@@ -4,5 +4,5 @@
     - start-zuul-console
     - role: validate-host
       # TODO(mordred) When we have site-local variables, these should go there
-      zuul_traceroute_host: 80.158.20.68
+      zuul_traceroute_host: git.openstack.org
       zuul_image_manifest: /etc/dib-builddate.txt

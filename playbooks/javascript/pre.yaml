@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - bindep
+    - test-setup
+    - install-nodejs
+    - install-yarn
+    - revoke-sudo
+    - install-javascript-packages

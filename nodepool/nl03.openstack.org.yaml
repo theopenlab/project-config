@@ -1,0 +1,219 @@
+elements-dir: /etc/nodepool/elements
+images-dir: /opt/nodepool_dib
+
+zookeeper-servers:
+  - host: nodepool.openstack.org
+    port: 2181
+
+# NOTE(pabelanger): To avoid a race conditions between multiple launchers, only
+# nl01.o.o will manage min-ready of our labels.  If nl01.o.o is ever disabled,
+# another launcher will need to assume this logic.
+#
+# Note this doesn't apply for labels that are only provided by this launcher;
+# ubuntu-xenial-arm64 being one of them.
+labels:
+  - name: centos-7
+  - name: debian-stretch
+  - name: debian-stretch-arm64
+    min-ready: 1
+  - name: fedora-27
+  - name: fedora-28
+  - name: opensuse-423
+  - name: opensuse-tumbleweed
+  - name: ubuntu-bionic
+  - name: ubuntu-trusty
+  - name: ubuntu-xenial
+  - name: ubuntu-xenial-arm64
+    min-ready: 1
+
+providers:
+  - name: inap-mtl01
+    region-name: 'mtl01'
+    cloud: inap
+    boot-timeout: 120
+    launch-timeout: 600
+    rate: 0.001
+    diskimages: &provider_diskimages
+      - name: centos-7
+        config-drive: true
+      - name: debian-stretch
+        config-drive: true
+      - name: fedora-27
+        config-drive: true
+      - name: fedora-28
+        config-drive: true
+      - name: opensuse-423
+        config-drive: true
+      - name: opensuse-tumbleweed
+        config-drive: true
+      - name: ubuntu-bionic
+        config-drive: true
+      - name: ubuntu-trusty
+        config-drive: true
+      - name: ubuntu-xenial
+        config-drive: true
+    pools:
+      - name: main
+        max-servers: 190
+        labels:
+          - name: centos-7
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: centos-7
+            key-name: infra-root-keys
+          - name: debian-stretch
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: debian-stretch
+            key-name: infra-root-keys
+          - name: fedora-27
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: fedora-27
+            key-name: infra-root-keys
+          - name: fedora-28
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: fedora-28
+            key-name: infra-root-keys
+          - name: opensuse-423
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: opensuse-423
+            key-name: infra-root-keys
+          - name: opensuse-tumbleweed
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: opensuse-tumbleweed
+            key-name: infra-root-keys
+          - name: ubuntu-bionic
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: ubuntu-bionic
+            key-name: infra-root-keys
+          - name: ubuntu-trusty
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: ubuntu-trusty
+            key-name: infra-root-keys
+          - name: ubuntu-xenial
+            min-ram: 8000
+            flavor-name: 'A1.8'
+            diskimage: ubuntu-xenial
+            key-name: infra-root-keys
+
+  - name: vexxhost-ca-ymq-1
+    region-name: 'ca-ymq-1'
+    cloud: vexxhost
+    boot-timeout: 120
+    rate: 0.001
+    diskimages: *provider_diskimages
+    pools:
+      - name: main
+        # NOTE(mnaser): Disable until Volume quotas and clean ups are available
+        #               in Nodepool.
+        max-servers: -1
+        labels:
+          - name: centos-7
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: centos-7
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: debian-stretch
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: debian-stretch
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: fedora-27
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: fedora-27
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: fedora-28
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: fedora-28
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: opensuse-423
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: opensuse-423
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: opensuse-tumbleweed
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: opensuse-tumbleweed
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: ubuntu-bionic
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: ubuntu-bionic
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: ubuntu-trusty
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: ubuntu-trusty
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+          - name: ubuntu-xenial
+            min-ram: 8000
+            flavor-name: 'v2-highcpu-8'
+            diskimage: ubuntu-xenial
+            key-name: infra-root-keys
+            boot-from-volume: True
+            volume-size: 80
+
+  - name: linaro-cn1
+    region-name: 'RegionOne'
+    cloud: linaro
+    boot-timeout: 600
+    launch-timeout: 800
+    rate: 0.001
+    diskimages:
+      - name: debian-stretch-arm64
+        config-drive: true
+      - name: ubuntu-xenial-arm64
+        config-drive: true
+    pools:
+      - name: main
+        max-servers: 8
+        labels:
+          - name: debian-stretch-arm64
+            min-ram: 8000
+            flavor-name: 'os.large'
+            diskimage: debian-stretch-arm64
+            key-name: infra-root-keys
+          - name: ubuntu-xenial-arm64
+            min-ram: 8000
+            flavor-name: 'os.large'
+            diskimage: ubuntu-xenial-arm64
+            key-name: infra-root-keys
+
+diskimages:
+  - name: centos-7
+  - name: debian-stretch
+  - name: debian-stretch-arm64
+  - name: fedora-27
+  - name: fedora-28
+  - name: gentoo
+  - name: opensuse-423
+  - name: opensuse-tumbleweed
+  - name: ubuntu-bionic
+  - name: ubuntu-trusty
+  - name: ubuntu-xenial
+  - name: ubuntu-xenial-arm64

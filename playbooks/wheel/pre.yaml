@@ -1,7 +1,38 @@
 - hosts: all
   roles:
-    - role: bindep
-      bindep_profile: test
-      bindep_dir: "src/{{ zuul.project.canonical_name }}"
+    - bindep
     - legacy-install-afs-with-puppet
-    - legacy-copy-project-config-scripts
+
+  pre_tasks:
+    # NOTE(pabelanger): Needed by puppet-openafs package.
+    - name: Add OpenAFS OpenStack CI build
+      become: yes
+      yum_repository:
+        name: openafs
+        description: OpenAFS OpenStack CI build
+        baseurl: https://tarballs.openstack.org/project-config/package-afs-centos7
+        gpgcheck: no
+      when: ansible_distribution == "CentOS"
+
+    # NOTE(pabelanger): Manually install EPEL dependencies as not to keep EPEL
+    # enabled.
+    - name: Manually install EPEL dependencies
+      become: yes
+      yum:
+        name: "{{ item }}"
+        enablerepo: epel
+        state: present
+      when: ansible_distribution == "CentOS"
+      with_items:
+        - dkms
+        - kstart
+        - parallel
+
+    # NOTE(pabelanger): We need to install extra liberies, such as:
+    # liberasurecode-devel
+    - name: Add centos-release-openstack-pike support
+      become: yes
+      when: ansible_distribution == "CentOS"
+      yum:
+        name: centos-release-openstack-pike
+        state: present
