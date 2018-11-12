@@ -1,3 +1,5 @@
+**NOTES: This repo is ready-only, we will sync with upstream in sometime manually.**
+
 OpenStack Infra Config Files
 ============================
 
